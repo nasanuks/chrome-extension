@@ -1,4 +1,4 @@
-var a = document.querySelectorAll('html,body,div,img');
+var a = document.querySelectorAll('html,body,div,section,img,nav');
 Object.keys(a).map(function(x) {a[x].style.filter = "none"})
 
 /*
