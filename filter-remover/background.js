@@ -11,6 +11,11 @@ function callback() {
     }
 }
 
+chrome.browserAction.onClicked.addListener(function (tab) {
+  chrome.tabs.sendMessage(tab.id, {text: 'report_back', status: status}, doStuffWithDom);
+});
+
+/*
 // When the browser-action button is clicked...
 chrome.browserAction.onClicked.addListener(function (tab) {
   // ...if it matches, send a message specifying a callback too
@@ -29,3 +34,4 @@ chrome.browserAction.onClicked.addListener(function (tab) {
     //chrome.tabs.sendMessage(tab.id, {text: 'report_back', status: status}, doStuffWithDom);
   })
 });
+*/

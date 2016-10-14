@@ -1,6 +1,14 @@
-var a = document.querySelectorAll('html,body,div,section,img,nav');
-Object.keys(a).map(function(x) {a[x].style.filter = "none"})
-
+function removeFilter () {
+  var a = document.querySelectorAll('html,body,div,section,img,nav');
+  Object.keys(a).map(function(x) {a[x].style.filter = "none"})
+}
+removeFilter();
+chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
+  // If the received message has the expected format...
+  if (msg.text === 'report_back') {
+    removeFilter();
+  }
+})
 /*
 chrome.storage.local.get("status", (obj) => {
   if (obj.status) {
