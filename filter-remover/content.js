@@ -2,41 +2,38 @@ function removeFilter () {
   var a = document.querySelectorAll('html,body,div,section,img,nav');
   Object.keys(a).map(function(x) {a[x].style.filter = "none"})
 }
-removeFilter();
+function setFilter () {
+  return;
+  var a = document.querySelectorAll('html,body,div,section,img,nav');
+  Object.keys(a).map(function(x) {a[x].style.filter = "grayscale(100%)"})
+}
+
+chrome.storage.local.get("status", function (x) {
+  x.status == 1 ? removeFilter() : null;
+})
+
+// removeFilter();
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
   // If the received message has the expected format...
-  if (msg.text === 'report_back') {
-    removeFilter();
+  if (msg.text === 'run') {
+    chrome.storage.local.get("status", function (x) {
+      //console.log("status:", x, this)
+      if(x.status == 1) {
+        setFilter();
+        // Toggle Status ON -> OFF
+        if (msg.toggle) {
+          chrome.storage.local.set({'status': 0})
+        }
+      }
+      else {
+        removeFilter();
+        // Toggle Status OFF -> ON
+        if (msg.toggle)
+        {
+          chrome.storage.local.set({'status': 1})
+        }
+      }
+    })
+
   }
 })
-/*
-chrome.storage.local.get("status", (obj) => {
-  if (obj.status) {
-    var a = document.querySelectorAll('html,body,div,img');
-    Object.keys(a).map(function(x) {a[x].style.filter = "none"})
-  }
-  else {
-    var b = document.querySelectorAll('html');
-    Object.keys(b).map(function(x) {b[x].style.filter = "grayscale(100%)"})
-  }
-})
-*/
-/*
-// Listen for messages
-chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
-    // If the received message has the expected format...
-    if (msg.text === 'report_back') {
-        // Call the specified callback, passing
-        // the web-page's DOM content as argument
-        if (msg.status) {
-          var a = document.querySelectorAll('html,body,div,img');
-          Object.keys(a).map(function(x) {a[x].style.filter = "none"})
-        }
-        else {
-          var b = document.querySelectorAll('html');
-          Object.keys(b).map(function(x) {b[x].style.filter = "grayscale(100%)"})
-        }
-        sendResponse(document.all[0].outerHTML);
-    }
-});
-*/

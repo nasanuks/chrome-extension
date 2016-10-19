@@ -4,13 +4,14 @@
   "name": "Filter Remover",
 
   "description": "Bring color back to website. In case of async content loading. click on icon again to run script manually.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "icons": { "16": "icon16.png",
              "48": "icon48.png",
             "128": "icon128.png" },
   "browser_action": {
     "default_icon": "icon16.png",
-    "default_title": "click here to run color script manually."
+    "default_title": "click here to run color script manually.",
+    "default_popup": "popup.html"
   },
   "background": {
     "persistent": false,
@@ -27,6 +28,7 @@
     }
   ],
   "permissions": [
-    "activeTab"
+    "tabs",
+    "storage"
   ]
 }
