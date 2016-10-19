@@ -1,6 +1,9 @@
 function removeFilter () {
   var a = document.querySelectorAll('html,body,div,section,img,nav');
-  Object.keys(a).map(function(x) {a[x].style.filter = "none"})
+  Object.keys(a).map(function(x) {
+    a[x].style.filter = "none"
+    a[x].style.webkitFilter = "none"
+  })
 }
 removeFilter();
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {

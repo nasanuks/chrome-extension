@@ -4,7 +4,7 @@
   "name": "Filter Remover",
 
   "description": "Bring color back to website. In case of async content loading. click on icon again to run script manually.",
-  "version": "1.0.3",
+  "version": "1.1.1",
   "icons": { "16": "icon16.png",
              "48": "icon48.png",
             "128": "icon128.png" },
